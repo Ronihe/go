@@ -93,5 +93,119 @@ func Type(x interface{}) {
 }
 ```
 
+## Functions:
+The execution of Go program starts from the main function itself func main(){    } . A function takes one or more parameters and return one or more outputs. Like other programming languages, go explicitly needs to return values.
+```
+func <function name>(parameters)(return types){
+ …………….//Executable code
+ return <value> //If function is returning
+}
+```
+
+## variadic functions
+pass in any number of parameters of the same type
+```
+func sum(args ..int)int{ //Variadic function
+    total:=0
+    for value:=range args{
+        total+=value
+    }
+    return sum
+ }
+ func main(){
+    fmt.Println(sum(54,76,43,23,78)) //Passing multiple values
+    data:=[]int{33,87,43,21} //Passing Slice of ints
+    fmt.Println(sum(data...))
+```
+## Function as expression
+We can pass function to an expression and call that function by using expression/variable name. This is the only way to have one function inside another.
+
+```
+func main(){
+message:=func(){
+fmt.Println(“Good Morning User”)
+}
+message() //calling function by expression name/var name as anonymous fun
+fmt.Printf(“%T”,message) //Its type will be a func()
+```
+## Closure
+
+
+```
+func main(){
+ sum:=func (x,y int)(int){
+ return x+y
+ }
+ fmt.Println(“Sum is”,sum(1, 2))
+}
+```
+
+
+## callbacks
+Passing a function as an argument is called callback in golang. Here, we can pass function as an argument.
+**call**
+
+```
+func main(){
+ show([]int{43, 76, 34}, func(n int) {
+ fmt.Println(n)
+ })
+}
+
+ func show(numbers [ ]int, call func(int)) {
+ for _, n := range numbers {
+ call(n)
+ }
+}
+```
+
+## recursion
+```
+func factorial(n int) int {
+ if n==1{
+ fmt.Println(n)
+ }
+ return n*factorial(n-1) //factorial() will call itself till it reaches to 0
+```
+
+## Defer
+Go has a special statement defer which schedules a function call to execute before function completes.
+```
+f,_:=os.Open(“filename.txt”)
+defer f.Close()
+```
+Advantages:
+- It keeps our Close() near to the Open() and it’s easy to understand
+- deferred func will always run even if runtime panic err occurs
+
+## Pass By value
+
+Strictly speaking, there is only one way to pass parameters in Go is Pass By Value. Whenever a variable is passed as a parameter, a copy of that variable is created and passed to the function and this copy will be at a different memory location.
+
+In case, variable is passed as a pointer argument then again new copy of parameter is created and that will point to the same address.
+
+
+## Anonymous Function
+
+
+# Data Structure:
+
+## Array:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
