@@ -58,7 +58,39 @@ func call(n int) {
 } 
 //Here o/p is still 5
 
+```
 
+## control flow
+control flow stmt : to break the flow of execution by branching, looping, decision making by enabling the program to execute the code based on the conditions.
+
+- if / else if / else
+- for loop:
+    ```
+    for init; condition; increment/decrement{
+        
+    }
+    ```
+- 
+
+## switch case
+- compare the values of the same type
+- set optional default stmt if the condition fails
+- use expression if need to compare condition based on the vaue to use
+
+- also switch on types also:
+```
+func Type(x interface{}) {
+ switch x.(type) { //this one is assert
+ case int:
+ fmt.Println("int")
+ case string:
+ fmt.Println("string")
+ case wish:
+ fmt.Println("wish")
+ default:
+ fmt.Println("Unknown Type")
+ }
+}
 ```
 
 
