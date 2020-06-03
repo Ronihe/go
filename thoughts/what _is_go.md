@@ -19,6 +19,13 @@ var types determins the how much memory space occupies in storage and bit patter
 - string
 - derived types: pointer, array, structure, union types, function types, slice types, interface, map
 
+## quotes in golang
+
+double quotes: define a string
+back quotes: define a raw literal string
+single quotew: byte or rune.
+
+
 ## variables
 
 shorthand `:=` only inside of fuc
@@ -285,4 +292,187 @@ var dictionary map[string]int //map using var
  fmt.Println(dictionary[“Zero”]) //Accessing value using key
 ```
 `dictionary:=make(map[string]int) //map using make()`
+
+The functions provided are len(map) and delete(mapName,key)
+
+### range:
+Range : Range is used to iterate over the slice and map along with for loop. When range is used with slice it returns two values- 1st one is index and 2nd one is copy of the element at that index.
+
+## struct:
+- Encapsulation → state [“fields”] behaviour [“methods”] export / unexported
+- Reusability → Inheritance [“Embedded Types”]
+- Polymorphism → Interfaces
+- Overriding → Promotion
+
+- user defined type
+- we declare the type
+- the type has fields
+- the type can also have “tags”
+- the type has an underlying type
+- in this case, underlying type is struct
+- we declare variables of the type
+- we initialize those variables
+- initialize with specific value or with default values.
+
+But in Golang, they are ‘associated’ with struct.
+
+```
+type Animal struct{ }
+func (e Animal ) eat () { } //Methods defined outside but works on same struct
+
+```
+
+```
+mob:=new(Mobile)
+```
+
+```
+mob:=Mobile{brand:“Samsung”,model:”Galaxy”,price:24500}
+```
+
+## Methods
+Go supports methods to define struct.
+
+func (receiverName receiverType) functionName(arguments) returnType
+
+Methods having pointer receivers can modify the value to which the receiver points.
+
+## Type Aliasing –
+
+## Embedded Types –
+
+## Promotion
+Embedding is the composition not inheritance, but Go supports something called “promotion” where the fields and methods of the embedded type becomes available to the embedding type.
+
+Go automatically handles conversion between values and pointers for method calls. You may want to use a pointer receiver type to avoid copying method calls.
+
+## Struct Pointer
+We can use struct pointer to access struct fields –
+   
+```
+mob:=&Mobile {“Lenovo”,”A6”,”6700”}
+ fmt.Println(mob.brand,mob.model,mob.price)
+```
+## JSON
+JSON(JavaScript Object Notation) is simple text based data interchanging format. Basically we use structs for JSON for putting and receiving the data. It is lightweight and gives faster performance to access the data
+
+## Encoding –
+- Marshal → to encode GO values to JSON in string format
+- Unmarshal → to decode JSON data to GO values
+- Encoding → same as Marshal but in streams
+- Decoding → same as unmarshal but from streams
+
+Go has built-in support for JSON encoding by providing functions in “json/encoding” package.
+
+## marshalling
+This function will convert the given data structure into JSON in [ ]byte format which we need to convert into string.
+
+
+## Unmarshalling
+```
+func Unmarshal(data [ ]byte,v interface{ }
+var per Person
+err:=json.Unmarshal(b,&per)
+)
+
+```
+If the JSON fits and matches with struct fields, after the call err will be nil and data from b will have been stored in the struct m, but non-matched fields will not be decoded
+
+
+## Tags
+The tags are given to the fields to attach meta information and acquired by using reflection. It is used to provide info on how struct field is encoded to or decoded from another format (or stored /retrieved from database), but you can use it to store whatever meta-info you want either for another package or for your use.
+
+```
+type User struct{
+ Name string ` json:”name” xml:”name” ` 
+ Age int `json:”omitempty”`
+}
+```
+
+## encoding
+
+Encoding works with writer and writing streams of JSON data. The GO has provided below function for encoding JSON through writer interface –
+
+```
+func (enc *Encoder) Encode (v interface{ }) error
+```
+```
+json.NewEncoder(os.Stdout).Encode(p1)
+```
+
+```
+If we see the source code, the NewEncoder(w *io.Writer) *Encoder takes writer and returns pointer to an Encoder for encoding and os.Stdout are open files pointing to standard input. Stdout is a pointer to file and pointer to a file implements  func(f *file ) Write(b [ ]byte) (n int,err error) and that means it is implementing this method from Writer interface. (Polymorphism)
+```
+
+
+## decoding
+Decoding works with reader and reading streams of JSON data. The GO has provided below function for encoding JSON through writer interface –
+
+```
+func (dec *Decoder) Decode (v interface{ }) error
+```
+
+NewReader( ) will return a reader and give it to NewDecoder( ) so that it will decode the JSON.
+
+```
+json.NewDecoder(reader).Decode(&p1)
+```
+
+## Strings:
+
+
+
+
+## Interface:
+An interface is an abstract type. It doesn’t expose the representation or internal structure of its values, or set of basic operation they support; it reveals only some of their methods. When you have value of an interface type, you don’t know only what it is; you only know what it can do.
+
+
+Interfaces are named collection of method signatures only (like java). To implement an interfaces in Go, we need to implement all the methods of that interface.
+
+```
+type interface_name interface{
+ /* method signature (one or more method sets) */
+}
+```
+
+This is what we call Polymorphism. Polymorphism is ability to write code that take on different behaviour through its implementation of types.
+
+## Empty Interface
+Empty interface has zero methods. It is like Object class (which is superclass of all classes in java and accept any object). Similar to this, empty interface accepts any interface to itself.
+
+## Conversion vs Assertion
+Conversion process deals with two concepts like –
+- Widening → Converting from Lower to Higher data type
+- Narrowing → Converting from Higher to Lower data type 
+
+```
+var x=15 //int type
+var y=15.45
+fmt.Println(float(x)) → 15.00
+fmt.Println(int(y)) → 15
+```
+
+assertion: `interface_variable.(type)`
+
+# Concurrency:
+For this, Go has great support and enhancement for concurrency using goroutines and channels.
+
+## Goroutines:
+Goroutine is like thread concept in java which is capable of running with the multiple independent functions. To make function as a goroutine, you just need to add go keyword before the function.
+
+## wait group
+To use sync.WaitGroup :
+Create instance of sync.WaitGroup      → var wg sync.WaitGroup
+Call Add(n) where n is no of goroutines to wait for  → wg.Add(1)
+Execute defer Wg.Done( ) in each goroutine to indicate that goroutine is finished
+executing to the WaitGroup.
+Call wg.Wait( ) where we want to block
+
+## Concurrency vs Parallelism
+Concurrency is the composition of independently executing processes, while parallelism is the simultaneous execution of (possibly related) computations. Concurrency is dealing with lots of things at once. Parallelism is about doing things at once.
+
+
+
+
+
 
