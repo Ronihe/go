@@ -67,11 +67,13 @@ control flow stmt : to break the flow of execution by branching, looping, decisi
 
 - if / else if / else
 - for loop:
+
   ```
   for init; condition; increment/decrement{
 
   }
   ```
+
 -
 
 ## switch case
@@ -230,6 +232,7 @@ Slice is same like an array but it has variable length so we don’t need to spe
 ```
 var x[ ] float64
 ```
+
 Here, slice of type float64 elements will be created with length 0 & capacity 0
 
 We can also create slice by using make() also which is available in builtin package of golang
@@ -239,9 +242,10 @@ We can also create slice by using make() also which is available in builtin pack
 ```
 
 The length and capacity of slice can be obtained by using len(slice), cap(slice)
+
 ```
 array:=[ ]float64 {1,2,3,4,5} //slice of float64 elements
- x:=array[0:5] 
+ x:=array[0:5]
  fmt.Println(x)
 ```
 
@@ -250,5 +254,35 @@ You can do slicing on string because string is slice of bytes.
 - append
 - copy
 
+```
+func main() {
+ elements := []int{3, 5, 2, 6, 2}
+ arrays := make([ ]int, 0, 3) //Creating slice with make( )
+ for n := range elements {
+ fmt.Println("Elements", n)
+ }
+ for i := 0; i < 80; i++ {
+ arrays = append(arrays, i) // to append i elements to slice
+fmt.Println("Len:", len(arrays), "Capacity:", cap(arrays),
+ "Value: ", arrays[i])
+ }}
+```
 
+## Map
+
+An unique key value pair like dictionary is used to lookup values based on the key.
+
+```
+map [keyType] valueType
+
+```
+
+This includes unordered pairs. Maps are like literals but unique keys are required.
+
+```
+var dictionary map[string]int //map using var
+ dictionary[“Zero”]=1
+ fmt.Println(dictionary[“Zero”]) //Accessing value using key
+```
+`dictionary:=make(map[string]int) //map using make()`
 
