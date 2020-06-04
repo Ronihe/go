@@ -2,7 +2,11 @@ package main
 
 import (
 	"fmt"
+	"ood/friendship"
+	"ood/memcache"
+	"ood/miniTwitter"
 	"ood/shape"
+	"time"
 )
 
 type Animal struct {
@@ -74,6 +78,52 @@ var myCat *cat = &cat{
 func main() {
 	MakeSomeNoise(myDog)
 	MakeSomeNoise(myCat)
-	var s shape.Shape = shape.NewRect(6,7)
+	var s shape.Shape = shape.NewRect(6, 7)
 	fmt.Println(s.Area())
+
+	fmt.Println("------minitwitter----")
+	minit := miniTwitter.NewMniniTwitter()
+	err := minit.Follow(1, 2)
+	minit.PostTweet(1, "user 1 first post")
+	time.Sleep(10000)
+	minit.PostTweet(1, "user 1 second post")
+	time.Sleep(10000)
+
+	minit.PostTweet(1, "user 1 third post")
+
+	time.Sleep(1000)
+	minit.PostTweet(1, "user 1 forth post")
+	time.Sleep(10000)
+	minit.PostTweet(1, "user 1 fifth post")
+	time.Sleep(10000)
+	minit.PostTweet(1, "user 1  sixth post")
+	time.Sleep(10000)
+	minit.PostTweet(1, "user 1 seventh post")
+	time.Sleep(10000)
+	minit.PostTweet(1, "user 1 eighth post")
+	time.Sleep(10000)
+	minit.PostTweet(1, "user 1 ninth post")
+	time.Sleep(1000)
+	minit.PostTweet(1, "user 1 tenth post")
+	time.Sleep(1 * time.Second)
+	minit.PostTweet(1, "user 1 eleventh post")
+	time.Sleep(1 * time.Second)
+
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	x := minit.GetNewsFeed(1)
+	fmt.Println(x)
+
+	fmt.Println("------friendship-----")
+	f := friendship.NewFriendship()
+	f.Follow(1, 2)
+	fs := f.GetFollowers(1)
+	fmt.Println("1's followers", fs)
+
+	fmt.Println(".....memcache----")
+	m := memcache.NewMemcache()
+	val := m.Set(1, 222, 30)
+	fmt.Println("memcahce", val)
 }
