@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"ood/shape"
 )
 
 type Animal struct {
@@ -73,4 +74,6 @@ var myCat *cat = &cat{
 func main() {
 	MakeSomeNoise(myDog)
 	MakeSomeNoise(myCat)
+	var s shape.Shape = shape.NewRect(6,7)
+	fmt.Println(s.Area())
 }
